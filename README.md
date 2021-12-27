@@ -42,7 +42,25 @@ docker run -itd --name="onenav" -p 80:80 \
 * `PASSWORD`：设置密码，上述设置为`xiaoz.me`
 * `/data/onenav`：本机挂载目录，用于持久存储Onenav数据
 
-> 更多说明，请参考帮助文档：https://www.yuque.com/helloz/onenav
+更多说明，请参考帮助文档：https://www.yuque.com/helloz/onenav
+
+## 安全设置
+
+如果您使用得Nginx，请务必将以下规则添加到站点配置中，否则数据库可能被下载（非常危险）：
+`#安全设置
+location ~* ^/(class|controller|db|data|functions|templates)/.*.(db3|php|php5)$ {
+    return 403;
+}
+location /db {
+        deny all;
+}
+
+#伪静态
+rewrite ^/click/(.*) /index.php?c=click&id=$1 break;
+rewrite ^/api/(.*)?(.*) /index.php?c=api&method=$1&$2 break;
+rewrite /login /index.php?c=login break;`
+
+如果使用得Apache则无需设置，已内置.htaccess进行屏蔽。
 
 ## Demo
 
