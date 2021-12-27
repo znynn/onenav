@@ -47,7 +47,7 @@ docker run -itd --name="onenav" -p 80:80 \
 ## 安全设置
 
 如果您使用得Nginx，请务必将以下规则添加到站点配置中，否则数据库可能被下载（非常危险）：
-`#安全设置
+```#安全设置
 location ~* ^/(class|controller|db|data|functions|templates)/.*.(db3|php|php5)$ {
     return 403;
 }
@@ -58,7 +58,8 @@ location /db {
 #伪静态
 rewrite ^/click/(.*) /index.php?c=click&id=$1 break;
 rewrite ^/api/(.*)?(.*) /index.php?c=api&method=$1&$2 break;
-rewrite /login /index.php?c=login break;`
+rewrite /login /index.php?c=login break;
+```
 
 如果使用得Apache则无需设置，已内置.htaccess进行屏蔽。
 
