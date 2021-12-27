@@ -47,7 +47,8 @@ docker run -itd --name="onenav" -p 80:80 \
 ## 安全设置
 
 如果您使用得Nginx，请务必将以下规则添加到站点配置中，否则数据库可能被下载（非常危险）：
-```#安全设置
+```
+#安全设置
 location ~* ^/(class|controller|db|data|functions|templates)/.*.(db3|php|php5)$ {
     return 403;
 }
